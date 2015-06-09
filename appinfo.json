@@ -1,0 +1,31 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "cory.r.west@gmail.com",
+    "longName": "Cory's Watchface",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "fonts/OpenSans-Bold.ttf",
+                "name": "FONT_OPEN_SANS_BOLD_50",
+                "type": "font"
+            },
+            {
+                "file": "fonts/OpenSans-Semibold.ttf",
+                "name": "FONT_OPEN_SANS_SEMI_BOLD_18",
+                "type": "font"
+            }
+        ]
+    },
+    "sdkVersion": "2",
+    "shortName": "Corys Watchface",
+    "uuid": "685116d3-2aa0-48c6-a077-488cbf9203cf",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
