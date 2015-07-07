@@ -1,7 +1,9 @@
 {
-    "appKeys": {},
+    "appKeys": {
+        "KEY_TEMPERATURE": 0
+    },
     "capabilities": [
-        ""
+        "location"
     ],
     "companyName": "cory.r.west@gmail.com",
     "longName": "Cory's Watchface",
@@ -9,13 +11,13 @@
     "resources": {
         "media": [
             {
-                "file": "fonts/OpenSans-Bold.ttf",
-                "name": "FONT_OPEN_SANS_BOLD_50",
+                "file": "fonts/OpenSans-Semibold.ttf",
+                "name": "FONT_OPEN_SANS_SEMI_BOLD_18",
                 "type": "font"
             },
             {
-                "file": "fonts/OpenSans-Semibold.ttf",
-                "name": "FONT_OPEN_SANS_SEMI_BOLD_18",
+                "file": "fonts/OpenSans-Bold.ttf",
+                "name": "FONT_OPEN_SANS_BOLD_50",
                 "type": "font"
             }
         ]
