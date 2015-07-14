@@ -9,7 +9,7 @@ var xhrRequest = function (url, type, callback) {
 
 function locationSuccess(pos) {
   // We will request the weather here
-  var url = 'http://api.openweathermap.org/data/2.5/weather?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude;
+  var url = 'http://api.wunderground.com/api/c460e181460b9060/conditions/pws:0/q/' + pos.coords.latitude + ',' + pos.coords.longitude + '.json';
   
   // Send request to OpenWeatherMap
   xhrRequest(url, 'GET', 
@@ -18,8 +18,7 @@ function locationSuccess(pos) {
       var json = JSON.parse(responseText);
 
       // Temperature in Kelvin requires adjustment
-      var temperature = Math.round(json.main.temp - 273.15);
-      temperature = ((temperature * 9) / 5) + 32;
+      var temperature = json.current_observation.temp_f;
       console.log('Temperature is F' + temperature);
 
       // Conditions

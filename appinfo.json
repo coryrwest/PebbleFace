@@ -11,21 +11,23 @@
     "resources": {
         "media": [
             {
-                "file": "fonts/OpenSans-Semibold.ttf",
-                "name": "FONT_OPEN_SANS_SEMI_BOLD_18",
+                "file": "fonts/Trek TNG Small.ttf",
+                "name": "FONT_TREK_TNG_24",
                 "type": "font"
             },
             {
-                "file": "fonts/OpenSans-Bold.ttf",
-                "name": "FONT_OPEN_SANS_BOLD_50",
+                "file": "fonts/Trek TNG.ttf",
+                "name": "FONT_TREK_TNG_70",
                 "type": "font"
             }
         ]
     },
-    "sdkVersion": "2",
+    "sdkVersion": "3",
     "shortName": "Corys Watchface",
+    "targetPlatforms": [
+        "basalt"
+    ],
     "uuid": "685116d3-2aa0-48c6-a077-488cbf9203cf",
-    "versionCode": 1,
     "versionLabel": "1.0",
     "watchapp": {
         "watchface": true

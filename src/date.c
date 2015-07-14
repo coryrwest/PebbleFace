@@ -6,11 +6,11 @@ static void update_date(TextLayer *s_day_layer, TextLayer* s_date_layer) {
 
   // Create a long-lived buffer
   static char day[] = "Wednesday";
-  static char date[] = "Jan 01 2015";
-
+  static char date[] = "September 01";
+                        
   // Write the current day into the buffer
   strftime(day, sizeof("Wednesday"), "%A", tick_time);
-  strftime(date, sizeof("Jan 01 2015"), "%b %d %Y", tick_time);
+  strftime(date, sizeof("September 01"), "%B %d", tick_time);
 
   // Display this time on the TextLayer
   text_layer_set_text(s_day_layer, day);
