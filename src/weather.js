@@ -9,38 +9,59 @@ var xhrRequest = function (url, type, callback) {
 
 function locationSuccess(pos) {
   // We will request the weather here
-  var url = 'http://api.wunderground.com/api/c460e181460b9060/conditions/pws:0/q/' + pos.coords.latitude + ',' + pos.coords.longitude + '.json';
+  var root = 'http://api.wunderground.com/api/c460e181460b9060';
+  var end = 'ws:0/q/' + pos.coords.latitude + ',' + pos.coords.longitude + '.json';
+  var temp = root + '/conditions/' + end;
+  var forecast = root + '/forecast/' + end;
   
-  // Send request to OpenWeatherMap
-  xhrRequest(url, 'GET', 
+  var dictionary = {
+        'KEY_TEMPERATURE': '',
+        'KEY_HIGH': ''
+      };
+  
+  // Send request to Wunderground
+  xhrRequest(temp, 'GET', 
     function(responseText) {
       // responseText contains a JSON object with weather info
       var json = JSON.parse(responseText);
 
-      // Temperature in Kelvin requires adjustment
+      // Get temp
       var temperature = json.current_observation.temp_f;
       console.log('Temperature is F' + temperature);
-
-      // Conditions
-//       var conditions = json.weather[0].main;      
-//       console.log('Conditions are ' + conditions);
       
-      // Assemble dictionary using our keys
-      var dictionary = {
-        'KEY_TEMPERATURE': temperature
-      };
+      // Add to dictionary
+      dictionary.KEY_TEMPERATURE = +temperature;
       
-      // Send to Pebble
-      Pebble.sendAppMessage(dictionary,
-        function(e) {
-          console.log('Weather info sent to Pebble successfully!');
-        },
-        function(e) {
-          console.log('Error sending weather info to Pebble!');
-        }
-      );
+      xhrRequest(forecast, 'GET', 
+        function(responseText) {
+          // responseText contains a JSON object with weather info
+          var json = JSON.parse(responseText);
+    
+          // Get temp
+          var temperature = json.forecast.simpleforecast.forecastday[0].high.fahrenheit;
+          console.log('High is F' + temperature);
+          
+          // Add to dictionary
+          dictionary.KEY_HIGH = +temperature;
+          
+          Send(dictionary);
+        }      
+      ); 
     }      
-  );
+  ); 
+}
+
+function Send(dictionary) {
+  // Send to Pebble
+  console.log(JSON.stringify(dictionary));
+  Pebble.sendAppMessage(dictionary,
+                        function(e) {
+                          console.log('Weather info sent to Pebble successfully!');
+                        },
+                        function(e) {
+                          console.log('Error sending weather info to Pebble!');
+                        }
+                       );
 }
 
 function locationError(err) {

@@ -1,12 +1,13 @@
 #include <pebble.h>
 static TextLayer *s_weather_layer;
 #define KEY_TEMPERATURE 0
+#define KEY_HIGH 1
 
 static void inbox_received_callback(DictionaryIterator *iterator, void *context) {
   // Store incoming information
-  static char temperature_buffer[8];
-  //static char conditions_buffer[32];
-  static char weather_layer_buffer[32];
+  static char temperature_buffer[6];
+  static char high_buffer[6];
+  static char weather_layer_buffer[16];
   
   // Read first item
   Tuple *t = dict_read_first(iterator);
@@ -16,11 +17,11 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
     // Which key was received?
     switch(t->key) {
     case KEY_TEMPERATURE:
-      snprintf(temperature_buffer, sizeof(temperature_buffer), "%dF", (int)t->value->int32);
+      snprintf(temperature_buffer, sizeof(temperature_buffer), "%d", (int)t->value->int32);
       break;
-//     case KEY_CONDITIONS:
-
-//       break;
+    case KEY_HIGH:
+      snprintf(high_buffer, sizeof(high_buffer), "%d", (int)t->value->int32);
+      break;
     default:
       APP_LOG(APP_LOG_LEVEL_ERROR, "Key %d not recognized!", (int)t->key);
       break;
@@ -30,7 +31,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
     t = dict_read_next(iterator);
   }
   
-  snprintf(weather_layer_buffer, sizeof(weather_layer_buffer), "%s", temperature_buffer);
+  snprintf(weather_layer_buffer, sizeof(weather_layer_buffer), "%s/%sF", temperature_buffer, high_buffer);
   text_layer_set_text(s_weather_layer, weather_layer_buffer);
 }
   

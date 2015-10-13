@@ -21,7 +21,6 @@ static void bt_handler(bool connected) {
   // Show current connection state
   if (connected) {
     text_layer_set_text(s_bt_state, "B");
-    vibes_short_pulse();
   } else {
     text_layer_set_text(s_bt_state, "-");
     vibes_short_pulse();
@@ -68,6 +67,8 @@ static void canvas_update_proc(Layer *this_layer, GContext *ctx) {
 }
 
 static void main_window_load(Window *window) {
+  // GRect(X, Y, Width, Height)
+  
   // Set font
   s_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_TREK_TNG_24));
   s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_TREK_TNG_70));
@@ -164,7 +165,7 @@ static void main_window_load(Window *window) {
   // ---- Weather ----
   // -----------------
   // Create time TextLayer
-  s_weather = text_layer_create(GRect(60, 0, 40, 26));
+  s_weather = text_layer_create(GRect(50, 0, 60, 26));
   text_layer_set_background_color(s_weather, GColorClear);
   text_layer_set_text_color(s_weather, GColorLightGray);
   
